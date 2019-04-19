@@ -5,6 +5,7 @@ LABEL maintainer="Burak Ince <burak.ince@linux.org.tr>"
 ENV SONAR_SCANNER_MSBUILD_VERSION=4.3.1.1372 \
     SONAR_SCANNER_VERSION=3.2.0.1227 \
     DOTNET_SDK_VERSION=2.2 \
+    MONO_DEBIAN_VERSION=5.8.0.127-0xamarin5+debian9b1 \
     SONAR_SCANNER_MSBUILD_HOME=/opt/sonar-scanner-msbuild \
     DOTNET_PROJECT_DIR=/project \
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true \
@@ -12,13 +13,17 @@ ENV SONAR_SCANNER_MSBUILD_VERSION=4.3.1.1372 \
 
 RUN set -x \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
+  && echo "deb http://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
   && apt-get update \
   && apt-get install \
     curl \
     libunwind8 \
     gettext \
     apt-transport-https \
+    mono-complete="$MONO_DEBIAN_VERSION" \
+    ca-certificates-mono="$MONO_DEBIAN_VERSION" \
     referenceassemblies-pcl \
+    mono-xsp4 \
     wget \
     unzip \
     -y \
