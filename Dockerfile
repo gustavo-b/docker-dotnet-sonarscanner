@@ -60,8 +60,8 @@ RUN wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/
   && chmod 775 $SONAR_SCANNER_MSBUILD_HOME/**/bin/* \
   && chmod 775 $SONAR_SCANNER_MSBUILD_HOME/**/lib/*.jar
 
-# Setup Sonar Scanner PATH
-ENV PATH="$SONAR_SCANNER_MSBUILD_HOME:$SONAR_SCANNER_MSBUILD_HOME/sonar-scanner-$SONAR_SCANNER_VERSION/bin:${PATH}"
+# Setup Sonar Scanner & JAVA PATH
+ENV PATH="$SONAR_SCANNER_MSBUILD_HOME:$SONAR_SCANNER_MSBUILD_HOME/sonar-scanner-$SONAR_SCANNER_VERSION/bin:$JAVA_HOME/bin:${PATH}"
 
 COPY run.sh $SONAR_SCANNER_MSBUILD_HOME/sonar-scanner-$SONAR_SCANNER_VERSION/bin/
 
