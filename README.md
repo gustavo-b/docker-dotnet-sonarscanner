@@ -4,16 +4,16 @@ Sonar Scanner MsBuild Dockerfile for .Net Core Projects
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/gustavobatista/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/gustavobatista/docker-dotnet-sonarscanner/) [![Docker Automated build](https://img.shields.io/docker/automated/gustavobatista/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/gustavobatista/docker-dotnet-sonarscanner/) [![Docker Build Status](https://img.shields.io/docker/build/gustavobatista/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/gustavobatista/docker-dotnet-sonarscanner/)
 
-## This Image Using
+## Image Dependencies
 
 |                | Name          | Version       |
 | -------------- |:-------------:| -------------:|
 | OS             | Debian        |   Stretch (9) |
 | Java           | OpenJDK       |  8 Update 171 |
 | .NET Framework | Mono          |    5.12.0.226 |
-| .NET SDK       | .NET Core SDK | 2.1 (2.1.301) |
+| .NET SDK       | .NET Core SDK |           2.2 |
 | Sonar Scanner  | CLI           |    3.2.0.1227 |
-| Sonar Scanner  | MS Build      |    4.3.1.1372 |
+| Sonar Scanner  | MS Build      |   4.8.0.12008 |
 
 Please check [Releases Page](https://github.com/burakince/docker-dotnet-sonarscanner/releases) for details.
 
@@ -27,13 +27,13 @@ Please check [Releases Page](https://github.com/burakince/docker-dotnet-sonarsca
 
 ## Using Example
 
-First of all you need a sonarqube server. If you haven't one, run this code;
+First of all you need a SonarQube server, or a project on [SonarCloud](https://sonarcloud.io/). If you don't have one, run this code:
 
 ```
 docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 ```
 
-And then you need .Net Core project. If you haven't one, run this codes;
+And then you need a .Net Core project. If you don't have one, run this code:
 
 ```
 mkdir ConsoleApplication1
@@ -44,7 +44,7 @@ dotnet new sln
 dotnet sln ConsoleApplication1.sln add ConsoleApplication1.csproj
 ```
 
-Take login token from sonarqube server, change working directory to project directory and run this code;
+Get a login token from your SonarQube server or SonarCloud project, and run this code in the project directory that you wish to analyze:
 
 ```
 docker run --name dotnet-scanner -it --rm -v $(pwd):/project \
@@ -52,12 +52,12 @@ docker run --name dotnet-scanner -it --rm -v $(pwd):/project \
   -e PROJECT_KEY=ConsoleApplication1 \
   -e PROJECT_NAME=ConsoleApplication1 \
   -e PROJECT_VERSION=1.0 \
-  -e HOST=http://localhost:9000 \
+  -e HOST=https://sonarcloud.io \
   -e LOGIN_KEY=CHANGE_THIS_ONE \
-  burakince/docker-dotnet-sonarscanner
+  gustavobatista/docker-dotnet-sonarscanner
 ```
 
-Note: If you have sonarqube as docker container, you must inspect sonarqube's bridge network IP address and use it in HOST variable.
+Note: If you have SonarQube as docker container, you must inspect SonarQube's bridge network IP address and use it in HOST variable.
 
 ```
 docker network inspect bridge
