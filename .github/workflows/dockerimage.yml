@@ -16,4 +16,5 @@ jobs:
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          TAG_NAME: "v1.0.0"
           LATEST: "true"
