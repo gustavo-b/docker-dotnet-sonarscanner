@@ -48,6 +48,7 @@ Take login token from sonarqube server, change working directory to project dire
 
 ```
 docker run --name dotnet-scanner -it --rm -v $(pwd):/project \
+  -e PROJECT_ORGANIZATION=default
   -e PROJECT_KEY=ConsoleApplication1 \
   -e PROJECT_NAME=ConsoleApplication1 \
   -e PROJECT_VERSION=1.0 \
