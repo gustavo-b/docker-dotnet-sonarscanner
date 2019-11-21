@@ -2,7 +2,7 @@
 
 Sonar Scanner MsBuild Dockerfile for .Net Core Projects
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/burakince/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/burakince/docker-dotnet-sonarscanner/) [![Docker Automated build](https://img.shields.io/docker/automated/burakince/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/burakince/docker-dotnet-sonarscanner/) [![Docker Build Status](https://img.shields.io/docker/build/burakince/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/burakince/docker-dotnet-sonarscanner/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/gustavobatista/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/gustavobatista/docker-dotnet-sonarscanner/) [![Docker Automated build](https://img.shields.io/docker/automated/gustavobatista/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/gustavobatista/docker-dotnet-sonarscanner/) [![Docker Build Status](https://img.shields.io/docker/build/gustavobatista/docker-dotnet-sonarscanner.svg)](https://hub.docker.com/r/gustavobatista/docker-dotnet-sonarscanner/)
 
 ## This Image Using
 
