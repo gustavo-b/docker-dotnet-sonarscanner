@@ -6,15 +6,19 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-
-      - name: Build & Push to Docker Hub
-        uses: opspresso/action-docker@master
+      - name: Docker Registry
         env:
-          USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          TAG_NAME: "v1.0.0"
-          LATEST: "true"
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Building Docker Image
+        env:
+          CONTAINER_IMAGE_NAME: ${{ secrets.CONTAINER_IMAGE_NAME }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run:
+          docker build --no-cache -t $DOCKER_USERNAME/$CONTAINER_IMAGE_NAME:latest .
+      - name: Push Docker Container to Registry
+        env:
+          CONTAINER_IMAGE_NAME: ${{ secrets.CONTAINER_IMAGE_NAME }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: docker push $DOCKER_USERNAME/$CONTAINER_IMAGE_NAME:latest
